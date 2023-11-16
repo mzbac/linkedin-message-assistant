@@ -2,29 +2,29 @@ import { Input, Button, Space, Card } from "antd";
 import React, { useEffect, useState } from "react";
 
 export const APIInput = () => {
-  const [apiKey, setAPIKey] = useState("");
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
     // Load apiKey from chrome storage
     // @ts-ignore
-    chrome.storage.sync.get(["openAIApiKey"], (res) => {
-      setAPIKey(res.openAIApiKey);
+    chrome.storage.sync.get(["localLLMUrl"], (res) => {
+      setUrl(res.localLLMUrl);
     });
   }, []);
 
   return (
-    <Card title="GPT3 for slack" bordered={false}>
+    <Card title="LLM Endpoint" bordered={false}>
       <Space direction="horizontal">
-        <Input.Password
-          placeholder="API key"
-          style={{ width: 180 }}
-          value={apiKey}
-          onChange={(e) => setAPIKey(e.target.value)}
+        <Input
+          placeholder="URL"
+          style={{ width: 250 }}
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
         />
         <Button
           type="primary"
           onClick={() => {
-            chrome.storage.sync.set({ openAIApiKey: apiKey });
+            chrome.storage.sync.set({ localLLMUrl: url });
           }}
         >
           Save

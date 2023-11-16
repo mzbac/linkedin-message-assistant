@@ -1,5 +1,13 @@
+const getUrl = async () => {
+  const {
+    localLLMUrl,
+  } = await chrome.storage.sync.get([
+    "localLLMUrl",
+  ]);
+  return localLLMUrl
+}
 const getNextTokens = async (prompt: string) => {
-  const url = "http://192.168.0.9/generate";
+  const url = await getUrl();
   try {
 
 
