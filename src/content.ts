@@ -22,10 +22,25 @@ const __assistant__buttons_store = (function () {
   };
 })();
 const __assistant__BUTTONS = ["generate"];
+function replaceContent(contentEditableElement: HTMLDivElement, newText: string) {
+  contentEditableElement.focus();
 
+  var range = document.createRange();
+  range.selectNodeContents(contentEditableElement);
+
+  var sel = window.getSelection();
+  sel?.removeAllRanges();
+  sel?.addRange(range);
+
+  var htmlText = newText.replace(/\n/g, '<br>');
+
+  document.execCommand('insertHTML', false, htmlText);
+}
 pubSub.subscribe(
   "update-last-active-element-innerHtml",
-  (result: string) => (__assistant__element_store.get().innerHTML = result)
+  (result: string) => {
+    replaceContent(__assistant__element_store.get(), result)
+  }
 );
 pubSub.subscribe("last-active-element", (div: HTMLDivElement) =>
   __assistant__element_store.set(div)
