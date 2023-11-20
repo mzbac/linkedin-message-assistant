@@ -9,8 +9,6 @@ const getUrl = async () => {
 const getNextTokens = async (prompt: string) => {
   const url = await getUrl();
   try {
-
-
     // Create request body
     const data = {
       inputs: prompt,
