@@ -32,4 +32,7 @@ npm run build
 ## Limitations
 
 - Currently, only the [dolphin-2.2-yi-34b](https://huggingface.co/ehartford/dolphin-2_2-yi-34b) model prompt format is supported due to it being the best model I found for writing LinkedIn messages assistant.
-- The backend API only supports the HuggingFace text generation inference because it is the most production-ready and easy to use.
+- The backend API only supports HuggingFace text generation inference because it is the most production-ready and easy to use. You can lauch the backend via docker command as shown below:
+    ```sh
+    docker run --gpus all --shm-size 1g -p 8000:80 -v $PWD/models:/data ghcr.io/huggingface/text-generation-inference:latest --max-total-tokens 2050 --max-input-length 1024 --max-batch-prefill-tokens 2048 --quantize awq --model-id TheBloke/dolphin-2_2-yi-34b-AWQ
+    ```
