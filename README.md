@@ -2,6 +2,8 @@
 
 A Chrome extension integrated with your open source LLM to help you write better Linkedin messages.
 
+[![demo](https://img.youtube.com/vi/_uDGL_fvuwY/0.jpg)](https://youtube.com/shorts/_uDGL_fvuwY)
+
 ## Installation
 
 - Download `chrome.zip` from [Releases](https://github.com/mzbac/gpt3-linkedin/releases)
