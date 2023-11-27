@@ -6,7 +6,7 @@ A Chrome extension integrated with your open source LLM to help you write better
 
 ## Installation
 
-- Download `chrome.zip` from [Releases](https://github.com/mzbac/gpt3-linkedin/releases)
+- Download `chrome.zip` from [Releases](https://github.com/mzbac/linkedin-message-assistant/releases/tag/1.0.0).
 - Unzip the file
 - In Chrome/Edge go to the extensions page (`chrome://extensions` or `edge://extensions`).
 - Enable Developer Mode.
