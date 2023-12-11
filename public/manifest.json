@@ -1,7 +1,7 @@
 {
   "name": "Linkedin Message Assistant",
   "description": "A chrome extension to help you write messages on LinkedIn",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "manifest_version": 3,
   "icons": {
     "128": "images/logo-128.png"

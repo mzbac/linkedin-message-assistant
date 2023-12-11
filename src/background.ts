@@ -81,15 +81,13 @@ const getNextTokens = async (prompt: string) => {
   }
 };
 
-chrome.runtime.onMessage.addListener(async (request) => {
+chrome.runtime.onMessage.addListener(async (request, sender) => {
   if (request.text != null) {
-    // Communicate with content script to get the current text
     const prompt = request.text;
     const nextTokens = await getNextTokens(prompt);
 
-    // Communicate with content script to update the text
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0]!.id!, { generate: nextTokens });
-    });
+    if (sender.tab && sender.tab.id) {
+      chrome.tabs.sendMessage(sender.tab.id, { generate: nextTokens });
+    }
   }
 });
