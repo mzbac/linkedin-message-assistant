@@ -12,7 +12,7 @@ A Chrome extension integrated with your open source LLM to help you write better
 - Enable Developer Mode.
 - Drag the unzipped folder anywhere on the page to import it (do not delete the folder afterwards).
 - Click on the extension icon.
-- Paste your local LLM url (e.g. `http://localhost:8000/generate`) and click on `Save`.
+- Paste your local LLM url (e.g. TGI endpoint `http://localhost:8000/generate` or Llamacpp endpoint `http://localhost:8000/completion`) and click on `Save`.
 - Open Linkedin message page in your browser.
 - Type your objective or intention of the message in the text box and click the button at the bottom to generate the message.
 - Enjoy!
