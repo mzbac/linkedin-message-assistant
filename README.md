@@ -34,7 +34,44 @@ npm run build
 ## Limitations
 
 - Currently, only the [dolphin-2.2-yi-34b](https://huggingface.co/ehartford/dolphin-2_2-yi-34b) model prompt format is supported due to it being the best model I found for writing LinkedIn messages assistant.
-- The backend API only supports HuggingFace text generation inference because it is the most production-ready and easy to use. You can lauch the backend via docker command as shown below:
+- The backend API only supports HuggingFace text generation inference and llama.cpp server. You can lauch the backend as shown below:
     ```sh
     docker run --gpus all --shm-size 1g -p 8000:80 -v $PWD/models:/data ghcr.io/huggingface/text-generation-inference:latest --max-total-tokens 2050 --max-input-length 1024 --max-batch-prefill-tokens 2048 --quantize awq --model-id TheBloke/dolphin-2_2-yi-34b-AWQ
+    ```
+
+    ```
+    #!/bin/bash
+
+    # Define the repository and model details
+    REPO_URL="git@github.com:ggerganov/llama.cpp.git"
+    REPO_DIR="llama.cpp"
+    MODEL_URL="https://huggingface.co/TheBloke/dolphin-2_2-yi-34b-GGUF/resolve/main/dolphin-2_2-yi-34b.Q4_K_M.gguf"
+    MODEL_FILE="dolphin-2_2-yi-34b.Q4_K_M.gguf"
+
+    # Clone the repository if it doesn't already exist
+    if [ ! -d "$REPO_DIR" ]; then
+    git clone "$REPO_URL"
+    fi
+
+    # Change directory to the cloned repository
+    cd "$REPO_DIR"
+
+    # Build the project using make
+    # Assume make is idempotent, as it should only rebuild changed files
+    make
+
+    # Change directory to the models folder
+    mkdir -p models
+    cd models
+
+    # Download the model if it doesn't already exist
+    if [ ! -f "$MODEL_FILE" ]; then
+    wget "$MODEL_URL"
+    fi
+
+    # Change directory back to the project root
+    cd ../
+
+    # Launch the server
+    ./server -m models/"$MODEL_FILE" --host 0.0.0.0 --port 8080 -np 2 -c 16000
     ```

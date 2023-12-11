@@ -2,3 +2,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.custom-space-item {
+  display: flex;
+}
+
+.custom-space-item .ant-space-item:first-child {
+  flex-grow: 2;
+}
