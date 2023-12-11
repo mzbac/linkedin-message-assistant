@@ -73,5 +73,5 @@ npm run build
     cd ../
 
     # Launch the server
-    ./server -m models/"$MODEL_FILE" --host 0.0.0.0 --port 8080 -np 2 -c 16000
+    ./server -m models/"$MODEL_FILE" --host 0.0.0.0 --port 8080 -c 16000
     ```
